@@ -1,4 +1,4 @@
-package main
+package day_01
 
 import (
 	"testing"
@@ -8,9 +8,9 @@ func TestCalibrateValueSimpleCase(t *testing.T) {
 	input := "1abc2"
 
 	output := CalibrateValue(input)
-	if output != 12 {
-		t.Fatalf("Expected 12, but got %v ", output)
-	}
+	expected := 12
+
+	assertEquals(output, expected, t)
 }
 
 func TestCalibrateValueOtherCase(t *testing.T) {
@@ -18,9 +18,8 @@ func TestCalibrateValueOtherCase(t *testing.T) {
 
 	output := CalibrateValue(input)
 	expected := 38
-	if output != expected {
-		t.Fatalf("Expected %v but got %v ", expected, output)
-	}
+
+	assertEquals(output, expected, t)
 }
 
 func TestCalibrateValueWithMultipleIntegersInString(t *testing.T) {
@@ -28,9 +27,8 @@ func TestCalibrateValueWithMultipleIntegersInString(t *testing.T) {
 
 	output := CalibrateValue(input)
 	expected := 15
-	if output != expected {
-		t.Fatalf("Expected %v but got %v ", expected, output)
-	}
+
+	assertEquals(output, expected, t)
 }
 
 func TestCalibrateValueWithSingleInteger(t *testing.T) {
@@ -38,7 +36,21 @@ func TestCalibrateValueWithSingleInteger(t *testing.T) {
 
 	output := CalibrateValue(input)
 	expected := 77
-	if output != expected {
-		t.Fatalf("Expected %v but got %v ", expected, output)
+
+	assertEquals(output, expected, t)
+}
+
+func TestCalibrateValueWithWordNumnbers(t *testing.T) {
+	input := "two1nine"
+
+	output := CalibrateValue(input)
+	expected := 29
+
+	assertEquals(output, expected, t)
+}
+
+func assertEquals(actual interface{}, expected interface{}, t *testing.T) {
+	if actual != expected {
+		t.Fatalf("Expected %v but got %v ", expected, actual)
 	}
 }
