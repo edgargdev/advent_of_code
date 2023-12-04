@@ -1,4 +1,4 @@
-package day_01
+package main
 
 import (
 	"testing"
@@ -49,6 +49,14 @@ func TestCalibrateValueWithWordNumnbers(t *testing.T) {
 	assertEquals(output, expected, t)
 }
 
+func TestCalibrateValueWithOnlyWordNumbers(t *testing.T) {
+	input := "eightwothree"
+
+	output := CalibrateValue(input)
+	expected := 83
+
+	assertEquals(output, expected, t)
+}
 func assertEquals(actual interface{}, expected interface{}, t *testing.T) {
 	if actual != expected {
 		t.Fatalf("Expected %v but got %v ", expected, actual)

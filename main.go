@@ -1,4 +1,4 @@
-package day_01
+package main
 
 import (
 	"bufio"
@@ -12,10 +12,32 @@ import (
 func CalibrateValue(input string) int {
 	var foundIntegers []string
 	stringSlice := strings.Split(input, "")
-	for _, v := range stringSlice {
+
+	integerStringMap := map[string]string{
+		"one": "1",
+		"two": "2",
+		"three": "3",
+		"four": "4",
+		"five": "5",
+		"six": "6",
+		"seven": "7",
+		"eight": "8",
+		"nine": "9",
+		"ten": "10",
+	}
+
+	for i, v := range stringSlice {
 		if _, err := strconv.Atoi(v); err == nil {
-			fmt.Printf("%q looks like an integer.\n", v)
+			log.Printf("%q looks like an integer.\n", v)
 			foundIntegers = append(foundIntegers, v)
+		} else {
+			for j := i+1; j <= len(stringSlice); j++ {
+				testString := input[i:j]
+				if val, ok := integerStringMap[testString]; ok {
+					log.Printf("%q looks like an integer.\n", val)
+					foundIntegers = append(foundIntegers, val)
+				}
+			}
 		}
 	}
 	calibratedValue := foundIntegers[0] + foundIntegers[len(foundIntegers)-1]

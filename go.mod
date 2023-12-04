@@ -1,3 +1,3 @@
-module day_01
+module main
 
 go 1.20
