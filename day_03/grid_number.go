@@ -21,7 +21,7 @@ func ParseLineForGridNumbers(line string) []GridNumber {
 			if tempIntString != "" {
 				gridNumberInt, err := strconv.Atoi(tempIntString)
 				if err == nil {
-					gridNumbers = append(gridNumbers, GridNumber{value: gridNumberInt, initialPosition: initialPosition})
+					gridNumbers = append(gridNumbers, GridNumber{value: gridNumberInt, initialPosition: initialPosition, endPosition: i-1})
 				}
 			}
 			tempIntString = ""
@@ -33,4 +33,5 @@ func ParseLineForGridNumbers(line string) []GridNumber {
 type GridNumber struct {
 	value           int
 	initialPosition int
+	endPosition int
 }
