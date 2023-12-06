@@ -44,6 +44,46 @@ func TestGameKnowsColorsItHas(t *testing.T) {
 	assertEquals(actualGreen, expectedGreen, t)
 }
 
+func TestGameKnowsColorsEdgeCases(t *testing.T) {
+	input := "Game 100: 6 blue, 10 green; 3 green, 4 blue, 1 red; 7 blue, 1 red, 12 green"
+
+	game := BuildGame(input)
+	actualID := game.id
+	actualBlue := game.numberOfBlueDice
+	actualRed := game.numberOfRedDice
+	actualGreen := game.numberOfGreenDice
+
+	expectedID := 100
+	expectedBlue := 7
+	expectedRed := 1
+	expectedGreen := 12
+
+	assertEquals(actualID, expectedID, t)
+	assertEquals(actualBlue, expectedBlue, t)
+	assertEquals(actualRed, expectedRed, t)
+	assertEquals(actualGreen, expectedGreen, t)
+}
+
+func TestGameKnowsColorsRandomCase(t *testing.T) {
+	input := "Game 74: 12 red, 12 green, 5 blue; 10 red, 7 blue, 15 green; 6 green, 19 red, 19 blue; 3 red, 7 blue, 16 green; 11 red, 14 green, 16 blue"
+
+	game := BuildGame(input)
+	actualID := game.id
+	actualBlue := game.numberOfBlueDice
+	actualRed := game.numberOfRedDice
+	actualGreen := game.numberOfGreenDice
+
+	expectedID := 74
+	expectedBlue := 19
+	expectedRed := 19
+	expectedGreen := 16
+
+	assertEquals(actualID, expectedID, t)
+	assertEquals(actualBlue, expectedBlue, t)
+	assertEquals(actualRed, expectedRed, t)
+	assertEquals(actualGreen, expectedGreen, t)
+}
+
 
 func assertEquals(actual interface{}, expected interface{}, t *testing.T) {
 	if actual != expected {

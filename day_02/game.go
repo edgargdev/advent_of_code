@@ -16,7 +16,7 @@ type Game struct {
 func BuildGame(inputString string) Game {
 	gameStringSplit := strings.Split(inputString, ": ")
 	games := gameStringSplit[1]
-	log.Printf("Games: %q\n", games)
+	// log.Printf("Games: %q\n", games)
 	revealedDiceInstances := strings.Split(games, "; ")
 
 	gameIdString := strings.Split(gameStringSplit[0], " ")[1]
