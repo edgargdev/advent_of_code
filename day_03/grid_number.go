@@ -6,6 +6,7 @@ import (
 )
 
 func ParseLineForGridNumbers(line string, lineNumber int) []GridNumber {
+	// log.Printf("Line: %v", line)
 	tempIntString := ""
 	initialPosition := 69
 	var gridNumbers []GridNumber
@@ -17,16 +18,33 @@ func ParseLineForGridNumbers(line string, lineNumber int) []GridNumber {
 				initialPosition = i
 			}
 			tempIntString += currentStringChararcter
-		} else {
-			if tempIntString != "" {
-				gridNumberInt, err := strconv.Atoi(tempIntString)
-				if err == nil {
-					gridNumbers = append(gridNumbers, GridNumber{value: gridNumberInt, initialPosition: initialPosition, endPosition: i-1, lineNumber: lineNumber})
-				}
+			
+		}
+		
+		if i >= len(line)-1 && tempIntString != "" {
+			gridNumberInt, err := strconv.Atoi(tempIntString)
+			if err == nil {
+				gridNumber := GridNumber{value: gridNumberInt, initialPosition: initialPosition, endPosition: i, lineNumber: lineNumber}
+				// log.Printf("E:Creating Grid Number %v", gridNumber)
+				gridNumbers = append(gridNumbers, gridNumber)
 			}
-			tempIntString = ""
+		}
+		if i < len(line)-1 {
+			if _, err := strconv.Atoi(string(line[i+1])); err != nil {
+				if tempIntString != "" {
+					gridNumberInt, err := strconv.Atoi(tempIntString)
+					if err == nil {
+						gridNumber := GridNumber{value: gridNumberInt, initialPosition: initialPosition, endPosition: i, lineNumber: lineNumber}
+						// log.Printf("A:Creating Grid Number %v", gridNumber)
+						gridNumbers = append(gridNumbers, gridNumber)
+					}
+				}
+				tempIntString = ""
+			}
 		}
 	}
+	// log.Printf("GridNumbers %v", gridNumbers)
+	// log.Printf("count: %v", len(gridNumbers))
 	return gridNumbers
 }
 

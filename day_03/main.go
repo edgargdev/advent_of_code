@@ -94,7 +94,10 @@ func FindPartNumbersAdjacentToASymbol(inputFileName string) int {
 		}
 
 		if validPartNumber {
+			// log.Printf("Adding GridNumber %v\n", number)
 			runningSum += number.value
+		} else {
+			log.Printf("Skipping GridNumber %v\n", number)
 		}
 		validPartNumber = false
 	}

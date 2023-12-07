@@ -23,6 +23,23 @@ func TestGridNumberKnowsItsInitialPosition(t *testing.T) {
 	assertEquals(6, actual[1].initialPosition, t)
 }
 
+func TestGridNumberLastCharacterIsDigit(t *testing.T) {
+	actual := ParseLineForGridNumbers("..........1", 0)
+	assertEquals(1, actual[0].value, t)
+}
+
+func TestGridNumberLastCharacterIsDigits(t *testing.T) {
+	actual := ParseLineForGridNumbers(".........23", 0)
+	assertEquals(23, actual[0].value, t)
+}
+
+func TestGridNumberRandomLineFromInput(t *testing.T) {
+	actual := ParseLineForGridNumbers("...................................&........466*.....@..................*827....530.............................129.628.....923.........=866", 0)
+	assertEquals(7, len(actual), t)
+	assertEquals(466, actual[0].value, t)
+	assertEquals(866, actual[6].value, t)
+}
+
 func TestGridNumberKnowsItsEndPoistion(t *testing.T) {
 	actual := ParseLineForGridNumbers("..35..633.", 0)
 
@@ -40,6 +57,14 @@ func TestGridNumberWithRandomCharacters(t *testing.T) {
 	assertEquals(121, actual[1].value, t)
 	assertEquals(4, actual[1].initialPosition, t)
 	assertEquals(6, actual[1].endPosition, t)
+}
+
+func TestGridNumberWithDigitsAtStart(t *testing.T) {
+	actual := ParseLineForGridNumbers("12....", 0)
+	single := ParseLineForGridNumbers("3..**.", 0)
+
+	assertEquals(12, actual[0].value, t)
+	assertEquals(3, single[0].value, t)
 }
 
 func TestGridNumberWithThreeDifferentNumbersInOneLine(t *testing.T) {
