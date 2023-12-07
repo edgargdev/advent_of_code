@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -27,77 +28,27 @@ func FindPartNumbersAdjacentToASymbol(inputFileName string) int {
 		}
 	}
 
-	log.Printf("Grid Numbers\n%v\n", gridNumbers)
+	log.Printf("Grid Numbers\n%v\n", gridNumbers)	
 
 	validPartNumber := false
 	for _,number := range gridNumbers {
-		// fmt.Println(number)
-		for i := number.initialPosition; i <= number.endPosition; i++ {
-			if i == number.initialPosition {
-				//CHECK the following
-				// * *
-				// * i
-				// * *
-				for y := i-1; y <= i ; y++ {
-					for x := number.lineNumber-1; x <= number.lineNumber+1; x++ {
-						if y >= 0 && y < len(grid[number.lineNumber]) && x >= 0 && x < len(grid){
-							if x != number.lineNumber || y != i {
-								// log.Printf("I:Checking coords %v,%v for Number %v", x,y,number)
-								if grid[x][y] != "." {
-									validPartNumber = true
-									// log.Printf("I FOUND SYMBOL i:%q for number %v on line %v", grid[x][y], number, number.lineNumber)
-								}
+		for j := number.initialPosition; j <= number.endPosition; j++ {
+			i := number.lineNumber
+			for x := i-1;  x <= i+1; x++ {
+				for y := j-1; y <= j+1; y++ {
+					if x!= i || y != j {
+						if x >= 0  && x < len(grid) && y >= 0 && y < len(grid[x]) {
+							_, err := strconv.Atoi(grid[x][y])
+							if grid[x][y] !=  "." && err != nil {
+								validPartNumber = true
 							}
 						}
-					}
-				}
-			} else if i == number.endPosition {
-				//CHECK the following
-				//  * *
-				//  i *
-				//  * *
-				for y := i; y <= i+1 ; y++ {
-					for x := number.lineNumber-1; x <= number.lineNumber+1; x++ {
-						// log.Printf("CORDS %v,%v", x, y)
-						if y >= 0 && y < len(grid[number.lineNumber]) && x >= 0 && x < len(grid){
-							if x != number.lineNumber || y != i {
-								// log.Printf("E:Checking coords %v,%v for Number %v", k,j,number)
-								if grid[x][y] != "." {
-									validPartNumber = true
-									// log.Printf("I FOUND SYMBOL e:%q for number %v on line %v", grid[x][y], number, number.lineNumber)
-								}
-							}
-						}
-					}
-				}
-			} else {
-				//CHECK the following
-				//  * 
-				//  i
-				//  *
-				x := number.lineNumber
-				if x-1 >= 0 {
-					// log.Printf("MU:Checking coords %v,%v for Number %v", k-1,i,number)
-					if grid[x-1][i] != "." {
-						validPartNumber = true
-						// log.Printf("I FOUND SYMBOL mu:%q for number %v on line %v", grid[x-1][i], number, number.lineNumber)
-					}
-				}
-				if x+1 < len(grid) {
-					// log.Printf("MB:Checking coords %v,%v for Number %v", k+1,i,number)
-					if grid[x+1][i] != "." {
-						validPartNumber = true
-						// log.Printf("I FOUND SYMBOL mb:%q for number %v on line %v", grid[x+1][i], number, number.lineNumber)
 					}
 				}
 			}
 		}
-
 		if validPartNumber {
-			// log.Printf("Adding GridNumber %v\n", number)
 			runningSum += number.value
-		} else {
-			log.Printf("Skipping GridNumber %v\n", number)
 		}
 		validPartNumber = false
 	}
