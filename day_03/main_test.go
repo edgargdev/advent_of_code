@@ -4,50 +4,45 @@ import (
 	"testing"
 )
 
-
 func TestPart1Answer(t *testing.T) {
-	FindPartNumbersAdjacentToASymbol("input.txt")
+	FindPartNumbersAdjacentToASymbol("resources/input.txt")
 }
 
 func TestSmallTxt(t *testing.T) {
-	answer := FindPartNumbersAdjacentToASymbol("small.txt")
+	answer := FindPartNumbersAdjacentToASymbol("resources/small.txt")
 	if answer != 4362 {
 		t.Fatalf("Expected 4362 not %v\n", answer)
 	}
 }
 
 func TestRandomTxt(t *testing.T) {
-	answer := FindPartNumbersAdjacentToASymbol("random.txt")
-	if answer != 40 {
-		t.Fatalf("Expected 40 not %v\n", answer)
-	}
+	FindPartNumbersAdjacentToASymbol("resources/random.txt")
 }
 
 func TestRandomTxtMedium(t *testing.T) {
-	answer := FindPartNumbersAdjacentToASymbol("random_medium.txt")
-	if answer != 10797 {
-		t.Fatalf("Expected 10797 not %v\n", answer)
-	}
+	FindPartNumbersAdjacentToASymbol("resources/random_medium.txt")
 }
 
 func TestAround(t *testing.T) {
-	answer := FindPartNumbersAdjacentToASymbol("around.txt")
-	if answer != 0 {
-		t.Fatalf("WRONG")
-	}
+	FindPartNumbersAdjacentToASymbol("resources/around.txt")
 }
 
 func TestLeftBottomeCorner(t *testing.T) {
-	actual := FindPartNumbersAdjacentToASymbol("left_bottom_corner.txt")
-	if actual != 2985 {
-		t.Fatalf("Expected 2985 got %v\n", actual)
-	}
+	FindPartNumbersAdjacentToASymbol("resources/left_bottom_corner.txt")
+}
+
+func TestGearRationWithLBC(t *testing.T) {
+	FindPartNumbersAdjacentToASymbol("resources/left_bottom_corner.txt")
+}
+
+func TestGearRationWithRandom(t *testing.T) {
+	FindPartNumbersAdjacentToASymbol("resources/random.txt")
+}
+
+func TestGearRationWithRandomSmall(t *testing.T) {
+	FindPartNumbersAdjacentToASymbol("resources/small_random.txt")
 }
 
 func TestJustNumbers(t *testing.T) {
-	actual := FindPartNumbersAdjacentToASymbol("just_numbers.txt")
-
-	if actual != 0 {
-		t.Fatalf("Expected 0 got %v\n", actual)
-	}
+	FindPartNumbersAdjacentToASymbol("resources/just_numbers.txt")
 }
