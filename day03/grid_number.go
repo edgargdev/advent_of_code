@@ -18,9 +18,9 @@ func ParseLineForGridNumbers(line string, lineNumber int) []GridNumber {
 				initialPosition = i
 			}
 			tempIntString += currentStringChararcter
-			
+
 		}
-		
+
 		if i >= len(line)-1 && tempIntString != "" {
 			gridNumberInt, err := strconv.Atoi(tempIntString)
 			if err == nil {
@@ -51,6 +51,6 @@ func ParseLineForGridNumbers(line string, lineNumber int) []GridNumber {
 type GridNumber struct {
 	value           int
 	initialPosition int
-	endPosition int
-	lineNumber int
+	endPosition     int
+	lineNumber      int
 }
