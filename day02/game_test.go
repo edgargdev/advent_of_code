@@ -84,10 +84,8 @@ func TestGameKnowsColorsRandomCase(t *testing.T) {
 	assertEquals(actualGreen, expectedGreen, t)
 }
 
-
 func assertEquals(actual interface{}, expected interface{}, t *testing.T) {
 	if actual != expected {
 		t.Fatalf("Expected %v but got %v ", expected, actual)
 	}
 }
-
