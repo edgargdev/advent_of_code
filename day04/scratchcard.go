@@ -2,9 +2,28 @@ package day04
 
 import (
 	"log"
+	"slices"
 	"strconv"
 	"strings"
 )
+
+type Scratchcard struct {
+	id             int
+	winningNumbers []int
+	gameNumbers    []int
+}
+
+func (scratchcard Scratchcard) getWinners() []int {
+	winningNumbers := scratchcard.winningNumbers
+	var winners []int
+	for _,number := range scratchcard.gameNumbers {
+		if slices.Contains(winningNumbers, number) {
+			log.Printf("Winner: %v", number)
+			winners = append(winners, number)
+		}
+	}
+	return winners
+}
 
 func parseLineForScratchcard(line string) Scratchcard {
 	metadata, gameNumbersString := grabMetaAndNumbers(line)
@@ -16,12 +35,6 @@ func parseLineForScratchcard(line string) Scratchcard {
 		return Scratchcard{id: 0}
 	}
 	return Scratchcard{id: value, winningNumbers: winningNumbers, gameNumbers: playNumbers}
-}
-
-type Scratchcard struct {
-	id int
-	winningNumbers []int
-	gameNumbers []int
 }
 
 func grabMetaAndNumbers(line string) (string, string) {
@@ -39,7 +52,7 @@ func parseGameNumbers(gameNumbersString string) ([]int, []int) {
 
 func parseScratchCardNumbers(numbersString string) []int {
 	var numbers []int
-	for i := 0; i < len(numbersString)-1; i+=3 {
+	for i := 0; i < len(numbersString)-1; i += 3 {
 		stringNumber := strings.Trim(numbersString[i:i+2], " ")
 		possibleNumber, err := strconv.Atoi(stringNumber)
 		log.Printf("String Number: %v || Possible number: %v", stringNumber, possibleNumber)
